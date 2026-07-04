@@ -1,0 +1,10 @@
+*.beam
+*.ez
+/build
+erl_crash.dump
+
+# Local tooling
+.tools/
+
+# Generated site
+dist/
