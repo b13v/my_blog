@@ -1,0 +1,44 @@
+name: Deploy Blogatto to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main # Триггер запуска при пуше в ветку main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Устанавливаем Erlang и Gleam
+      - name: Set up Erlang/OTP and Gleam
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: '26.x' # Укажите нужную версию Erlang
+          gleam-version: '1.x' # Укажите нужную версию Gleam
+
+      # Скачиваем зависимости Gleam
+      - name: Download dependencies
+        run: gleam deps download
+
+      # Собираем статический сайт с помощью blogatto
+      # Внимание: замените 'build' в шаге ниже на реальную папку, 
+      # в которую blogatto складывает готовый HTML (например, output, dist или build)
+      - name: Build static site
+        run: gleam run
+
+      # Деплоим собранную статику в Cloudflare Pages
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: 'bitcoin-austrian-blog' # Имя вашего проекта в Cloudflare Pages (придумайте любое)
+          directory: 'dist' # Папка с результатом сборки из предыдущего шага
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
