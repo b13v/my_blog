@@ -13,8 +13,9 @@ jobs:
       deployments: write
 
     steps:
+      # Обновили до v5, чтобы убрать предупреждение о Node.js 20
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5 
 
       # Устанавливаем Erlang и Gleam
       - name: Set up Erlang/OTP and Gleam
@@ -27,20 +28,29 @@ jobs:
       - name: Download dependencies
         run: gleam deps download
 
+      # Проверяем структуру папок перед сборкой (для отладки)
+      - name: Debug before build
+        run: ls -la
+
       # Собираем статический сайт с помощью blogatto
       - name: Build static site
         run: gleam run
 
-      # Устанавливаем Node.js окружение для запуска Wrangler
+      # Проверяем, куда blogatto положил файлы (для отладки)
+      - name: Debug after build
+        run: ls -la
+
+      # Обновили до v5, чтобы убрать предупреждение о Node.js 20
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 24
 
-      # Устанавливаем Wrangler и деплоим напрямую в Cloudflare Pages
+      # Деплоим напрямую через Wrangler
       - name: Deploy to Cloudflare Pages via Wrangler
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          npx wrangler pages deploy dist --project-name="bitcoin-austrian-blog" --branch="main"
+        # Внимание: если шаги отладки покажут, что папки 'build' нет, 
+        # мы сразу поймем, как называется правильная директория.
+        run: npx wrangler pages deploy dist --project-name="bitcoin-austrian-blog" --branch="main"
