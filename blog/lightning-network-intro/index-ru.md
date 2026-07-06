@@ -4,6 +4,7 @@ date: 2025-06-28 00:00:00
 description: Что такое Lightning Network и как эта технология делает Биткоин быстрым и дешевым для повседневных платежей.
 slug: lightning-network-intro
 tags: lightning, платежи, масштабирование
+image: /images/btc4.jpg
 ---
 
 # Введение в Lightning Network

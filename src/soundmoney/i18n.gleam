@@ -33,9 +33,9 @@ pub fn site_subtitle(lang: Language) -> String {
 pub fn meta_description(lang: Language) -> String {
   case lang {
     Russian ->
-      "Блог " <> author_name_genitive(lang) <> " о Биткоине, австрийской экономической школе и личных финансах."
+      "Блог о Биткоине, австрийской экономической школе и личных финансах."
     Kazakh ->
-      author_name_nominative(lang) <> "тың Биткоин, Австрия экономикалық мектебі және жеке қаржы туралы блогы."
+      "Биткоин, Австрия экономикалық мектебі және жеке қаржы туралы блог."
   }
 }
 
@@ -95,13 +95,6 @@ pub fn about_author(lang: Language) -> String {
 pub fn author_name_nominative(lang: Language) -> String {
   case lang {
     Russian -> "Бейбут Ержанов"
-    Kazakh -> "Бейбит Ержанов"
-  }
-}
-
-fn author_name_genitive(lang: Language) -> String {
-  case lang {
-    Russian -> "Бейбута Ержанова"
     Kazakh -> "Бейбит Ержанов"
   }
 }

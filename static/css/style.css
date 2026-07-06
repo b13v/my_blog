@@ -340,6 +340,14 @@ a:hover {
   line-height: 1.2;
 }
 
+.post-hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  margin-top: 24px;
+  box-shadow: var(--shadow);
+}
+
 .post-content {
   font-size: 1.05rem;
 }

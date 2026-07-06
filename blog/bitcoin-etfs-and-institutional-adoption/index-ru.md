@@ -4,6 +4,7 @@ date: 2025-07-05 00:00:00
 description: Как spot-ETF на биткоин изменили доступ институциональных инвесторов к BTC и что это значит для рынка.
 slug: bitcoin-etfs-and-institutional-adoption
 tags: etf, институции, инвестиции, традиционные финансы
+image: /images/btc7.jpg
 ---
 
 # Биткоин-ETF и институциональное принятие

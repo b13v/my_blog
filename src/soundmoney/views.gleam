@@ -196,9 +196,6 @@ pub fn home_page(
             attribute.alt("Bitcoin dawn"),
             attribute.class("hero-image"),
           ]),
-          html.p([attribute.class("page-description")], [
-            element.text(i18n.meta_description(lang)),
-          ]),
         ]),
         html.section([attribute.class("articles")], [
           html.h2([attribute.class("section-title")], [
@@ -268,6 +265,18 @@ fn post_path(post: Post(Nil)) -> String {
   "/blog/" <> lang <> "/" <> post.slug <> "/"
 }
 
+fn post_hero_image(post: Post(Nil)) -> Element(Nil) {
+  case dict.get(post.extras, "image") {
+    Ok(src) ->
+      html.img([
+        attribute.src(src),
+        attribute.alt(post.title),
+        attribute.class("post-hero-image"),
+      ])
+    Error(_) -> element.text("")
+  }
+}
+
 fn tags_from_post(post: Post(Nil)) -> List(Element(Nil)) {
   case dict.get(post.extras, "tags") {
     Ok(tags) ->
@@ -307,6 +316,7 @@ pub fn post_template(post: Post(Nil)) -> Element(Nil) {
               html.em([], [element.text(post.description)]),
             ]),
             html.div([attribute.class("post-tags")], tags),
+            post_hero_image(post),
           ]),
           html.div([attribute.class("post-content")], post.contents),
         ]),
