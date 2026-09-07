@@ -1,6 +1,6 @@
 ---
 title: Lightning Network-ке кіріспе
-date: 2025-02-19 00:00:00
+date: 2026-02-19 00:00:00
 description: Lightning Network деген не және бұл технология Биткоинді күнделікті төлемдер үшін жылдам және арзан етеді.
 slug: lightning-network-intro
 tags: lightning, төлемдер, масштабтау
