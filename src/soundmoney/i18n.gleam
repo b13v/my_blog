@@ -95,7 +95,7 @@ pub fn about_author(lang: Language) -> String {
 pub fn author_name_nominative(lang: Language) -> String {
   case lang {
     Russian -> "BY"
-    Kazakh -> "Бейбит Ержанов"
+    Kazakh -> "BY"
   }
 }
 
